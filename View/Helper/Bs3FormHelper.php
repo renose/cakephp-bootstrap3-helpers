@@ -303,12 +303,18 @@ class Bs3FormHelper extends FormHelper {
 			}
 		}
 
+        if($type === 'date')
+            $args['type'] = 'text';
+
 		// Render input field via parent method
 		$input = parent::_getInput($args);
 
 		if ($type == 'hidden') {
 			return $input;
 		}
+
+        if($type === 'date')
+            $input = str_replace('type="text"', 'type="date"', $input);
 
 		// Prepend beforeInput and append afterInput to generated input field
 		$html['input'] = $this->_getCustom('beforeInput') . $input . $this->_getCustom('afterInput');
